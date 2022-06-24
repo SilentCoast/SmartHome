@@ -1,6 +1,9 @@
 package com.example.demoexamsmartphone.FragmentsHomePage;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -26,8 +29,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -82,15 +83,87 @@ public class SettingFragment extends Fragment {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("isAuthorized",false);
-                editor.apply();
-                Intent intent = new Intent(view.getContext(), Authorization.class);
-                startActivity(intent);
+                new ApiRequestSignOut(view.getContext()).execute();
             }
         });
         new ApiRequestGetProfileInfo().execute();
     }
+
+        private class ApiRequestSignOut extends AsyncTask<String,String,String>{
+            String TAG = "API";
+            String className = getClass().getSimpleName();
+            ProgressDialog progressDialog;
+            AlertDialog.Builder alertDialog ;
+            boolean isError = false;
+            Intent intent ;
+            public ApiRequestSignOut(Context context){
+                progressDialog = new ProgressDialog(context);
+                alertDialog = new AlertDialog.Builder(context);
+                intent = new Intent(context, Authorization.class);
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog.setMessage("please wait");
+                alertDialog.setTitle("Error");
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+            }
+
+            @Override
+            protected String doInBackground(String... strings) {
+
+                HttpsURLConnection connection = null;
+                try {
+                    URL url = new URL(getResources().getString(R.string.baseURL)+"/user");
+                    connection = (HttpsURLConnection) url.openConnection();
+                    connection.setRequestMethod("DELETE");
+                    connection.setRequestProperty("token",token);
+
+                    if(connection.getResponseCode()!=201){
+                        Log.i(TAG, className + ": response : "+connection.getResponseCode()+" "+connection.getResponseMessage());
+                        alertDialog.setMessage(connection.getResponseCode()+" "+connection.getResponseMessage());
+                        isError = true;
+                    }
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line;
+
+                    while((line= bufferedReader.readLine())!=null){
+                        stringBuilder.append(line);
+                    }
+                    return stringBuilder.toString();
+
+                } catch (IOException e) {
+                    alertDialog.setMessage(e.getMessage());
+                    isError = true;
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Log.i(TAG, className + ": onPostExecute: "+s);
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
+                if(isError){
+                    alertDialog.show();
+                    return;
+                }
+
+                startActivity(intent);
+            }
+
+        }
+
         private class ApiRequestGetProfileInfo extends AsyncTask<String,String,String> {
 
             @Override

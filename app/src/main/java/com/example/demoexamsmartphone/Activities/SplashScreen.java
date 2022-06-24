@@ -58,7 +58,7 @@ SharedPreferences sharedPreferences;
         Log.i("API", "UUID: "+sharedPreferences.getString("UUID",""));
 
         //register app and open new Activity
-        new POSTRequestRegisterMobile().execute();
+        new POSTRequestRegisterApp().execute();
 
     }
 
@@ -82,17 +82,11 @@ SharedPreferences sharedPreferences;
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type","application/json");
-                //connection.setDoInput(true);
-                //connection.setDoOutput(true);
-                //connection.setChunkedStreamingMode(0);
-                //connection.connect();
-
 
                 OutputStream out = new BufferedOutputStream(connection.getOutputStream());
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
                 writer.write(postdata.toString());
                 writer.flush();
-
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -143,7 +137,7 @@ SharedPreferences sharedPreferences;
                 JSONObject postdata = new JSONObject();
                 // postdata.put("uuid",sharedPreferences.getString("UUID",""));
                 postdata.put("appId",getApplicationInfo().packageName);
-                postdata.put("competitor","Competitor-1");
+                postdata.put("competitor","Competitor-2");
 
                 URL url = new URL("https://smarthome.madskill.ru/app");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -156,10 +150,9 @@ SharedPreferences sharedPreferences;
                 writer.write(postdata.toString());
                 writer.flush();
 
-                if(connection.getResponseCode()!=201){
-//                    throw new IOException(urlConnection.getResponseCode()+ " " + urlConnection.getResponseMessage());
-                    Log.i("API",connection.getResponseCode()+ " " + connection.getResponseMessage());
-                }
+
+                    Log.i("API","regApp: "+connection.getResponseCode()+ " " + connection.getResponseMessage());
+
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 

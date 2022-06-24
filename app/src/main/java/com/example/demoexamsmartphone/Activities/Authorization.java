@@ -99,17 +99,10 @@ public class Authorization extends AppCompatActivity {
             try {
                 URL url = new URL("https://smarthome.madskill.ru/user");
                 connection = (HttpsURLConnection) url.openConnection();
-
-                //connection.setRequestProperty("X-HTTP-Method-Override","OPTIONS");
-
                 connection.setRequestMethod("OPTIONS");
                 connection.setRequestProperty("email",textViewEmail.getText().toString());
                 connection.setRequestProperty("password",textViewPassword.getText().toString());
                 connection.setRequestProperty("uuid",sharedPreferences.getString("UUID","none"));
-//                connection.setDoInput(true);
-//                connection.setDoOutput(true);
-//                connection.setChunkedStreamingMode(0);
-//                connection.connect();
 
                     if(connection.getResponseCode()!=201){
                         //DialogWindowWhenError
@@ -169,6 +162,8 @@ public class Authorization extends AppCompatActivity {
             Log.i("API", "token: "+token);
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+            catch ( NullPointerException exception){
             }
 
             SharedPreferences.Editor editor = sharedPreferences.edit();

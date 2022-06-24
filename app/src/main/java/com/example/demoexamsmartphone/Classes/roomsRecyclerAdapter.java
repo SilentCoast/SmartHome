@@ -1,18 +1,16 @@
-package com.example.demoexamsmartphone;
+package com.example.demoexamsmartphone.Classes;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.demoexamsmartphone.Classes.Room;
+import com.example.demoexamsmartphone.R;
 
 import java.util.ArrayList;
 
@@ -35,10 +33,9 @@ public class roomsRecyclerAdapter extends RecyclerView.Adapter<roomsRecyclerAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.imageView.setImageDrawable(rooms.get(position).getImage());
         holder.textViewName.setText(rooms.get(position).getName());
-        //
     }
 
-    public Object getItem(int id){
+    public Room getItem(int id){
         return rooms.get(id);
     }
     public Object getRoomName(int id){return rooms.get(id).getName();}

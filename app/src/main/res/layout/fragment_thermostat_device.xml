@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentsDevices.ThermostatDevice">
+
+    <TextView
+        android:id="@+id/textView19"
+        style="@style/Bold26Dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="Thermostat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView20"
+        style="@style/regular14Dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room Name"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchState"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="45dp"
+        android:checked="true"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:theme="@style/Theme.SwitchCustom"
+        app:layout_constraintBottom_toBottomOf="@+id/textView19"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBarFan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="80dp"
+        android:progress="30"
+        android:progressDrawable="@drawable/seekbar_style_fan"
+        android:thumb="@drawable/seekbar_custom_thumb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fan"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarFan"
+        app:layout_constraintStart_toStartOf="@+id/seekBarFan" />
+
+    <TextView
+        android:id="@+id/textViewTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="30"
+        android:textColor="@color/dark_red"
+        android:textSize="50sp"
+        app:layout_constraintStart_toStartOf="@+id/textView21"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature, *C"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textViewTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTemperature" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHeating"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/transparent"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/heating_on"
+        app:layout_constraintBottom_toTopOf="@+id/textView21"
+        app:layout_constraintStart_toStartOf="@+id/textViewTemperature" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCool"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:paddingBottom="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/cool_off"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonHeating"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonHeating"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonHeating" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/fan_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBarFan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBarFan" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="140dp"
+        android:src="@drawable/inner_circular"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBarTemperature"
+        app:layout_constraintEnd_toEndOf="@id/seekBarTemperature"
+        app:layout_constraintStart_toStartOf="@+id/seekBarTemperature"
+        app:layout_constraintTop_toTopOf="@+id/seekBarTemperature" />
+
+    <me.tankery.lib.circularseekbar.CircularSeekBar
+        android:id="@+id/seekBarTemperature"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="-140dp"
+
+        app:cs_circle_color="@color/grey"
+        app:cs_circle_progress_color="@color/dark_red"
+        app:cs_circle_stroke_width="10dp"
+        app:cs_end_angle="270"
+        app:cs_pointer_color="@color/white"
+        app:cs_start_angle="90"
+        app:cs_circle_style = "round"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonCool"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchState" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

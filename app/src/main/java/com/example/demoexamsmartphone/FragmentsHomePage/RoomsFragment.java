@@ -17,10 +17,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.demoexamsmartphone.Activities.Kitchen;
+import com.example.demoexamsmartphone.Activities.InsideRoom;
 import com.example.demoexamsmartphone.Classes.Room;
 import com.example.demoexamsmartphone.R;
-import com.example.demoexamsmartphone.roomsRecyclerAdapter;
+import com.example.demoexamsmartphone.Classes.roomsRecyclerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,12 +62,19 @@ public class RoomsFragment extends Fragment {
         //get rooms from server
         new ApiRequestGetRooms(view.getContext()).execute();
 
+        //click on specific room
         adapter.setClicklistener(new roomsRecyclerAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.click));
 
-                Intent intent = new Intent(getContext(), Kitchen.class);
+                Room currentRoom = adapter.getItem(position);
+                Intent intent = new Intent(getContext(), InsideRoom.class);
+                intent.putExtra("name",currentRoom.getName());
+                intent.putExtra("type",currentRoom.getType());
+                intent.putExtra("id",currentRoom.getId());
+                intent.putExtra("token",token);
+                intent.putExtra("uuid",uuid);
                 startActivity(intent);
 
             }
@@ -142,6 +149,7 @@ public class RoomsFragment extends Fragment {
             room.setImage(getResources().getDrawable(R.drawable.icon_kitchen));
             room.setName("Kitchenyyy");
             room.setType("Kitchen");
+            room.setImage(getImageFromTypeOfRoom(room.getType()));
             rooms.add(room);
             adapter.notifyDataSetChanged();
             if(progressDialog.isShowing()) {
@@ -212,6 +220,7 @@ public class RoomsFragment extends Fragment {
                     room.setType(jsonObject.getString("type"));
                     room.setName(jsonObject.getString("name"));
                     room.setId(jsonObject.getInt("id"));
+                    room.setImage(getImageFromTypeOfRoom(room.getType()));
                     rooms.add(room);
                     adapter.notifyDataSetChanged();
                 }
@@ -224,4 +233,15 @@ public class RoomsFragment extends Fragment {
         }
     }
 
+    public Drawable getImageFromTypeOfRoom(String roomType){
+        switch (roomType.toLowerCase()){
+            case "kitchen":
+                return (getResources().getDrawable(R.drawable.icon_kitchen));
+            case "living room":
+                return getResources().getDrawable(R.drawable.icon_living_room);
+            case "bathroom":
+                return getResources().getDrawable(R.drawable.icon_bathroom);
+        }
+        return null;
+    }
 }

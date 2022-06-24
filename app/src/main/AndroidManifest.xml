@@ -18,7 +18,7 @@
             android:name=".Activities.Registration"
             android:exported="false" />
         <activity
-            android:name=".Activities.Kitchen"
+            android:name=".Activities.InsideRoom"
             android:exported="true" />
         <activity
             android:name=".Activities.HomePage"

@@ -1,4 +1,4 @@
-package com.example.demoexamsmartphone.FragmentsKitchen;
+package com.example.demoexamsmartphone.FragmentsDevices;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,10 +16,10 @@ import android.widget.TextView;
 import com.example.demoexamsmartphone.R;
 
 
-public class LightInKitchen extends Fragment {
+public class LightDevice extends Fragment {
 
-   public LightInKitchen(){
-       super(R.layout.fragment_light_in_kitchen);
+   public LightDevice(){
+       super(R.layout.fragment_light_device);
    }
 
    ConstraintLayout layToTouch;
