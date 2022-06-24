@@ -35,6 +35,7 @@ public class roomsRecyclerAdapter extends RecyclerView.Adapter<roomsRecyclerAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.imageView.setImageDrawable(rooms.get(position).getImage());
         holder.textViewName.setText(rooms.get(position).getName());
+        //
     }
 
     public Object getItem(int id){
