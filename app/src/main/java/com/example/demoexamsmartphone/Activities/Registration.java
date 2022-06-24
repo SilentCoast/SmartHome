@@ -102,6 +102,7 @@ public class Registration extends AppCompatActivity {
 
             HttpURLConnection urlConnection = null;
             try {
+                //
                 //open URL conection and set properties
                 URL url = new URL("https://smarthome.madskill.ru/user");
                 urlConnection = (HttpURLConnection) url.openConnection();
