@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/back_with_border.xml" value="0.2765625" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/rounded_corners.xml" value="0.3828125" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_authorization.xml" value="0.33" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_kitchen.xml" value="0.25" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_main.xml" value="0.26766304347826086" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_registration.xml" value="0.3292572463768116" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_splash_screen.xml" value="0.32653985507246375" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/dialog_error.xml" value="0.28020833333333334" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_blank.xml" value="0.20520833333333333" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_light_in_kitchen.xml" value="0.33" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_maps.xml" value="0.2625" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_rooms.xml" value="0.33" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_setting.xml" value="0.25" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_statics.xml" value="0.28177083333333336" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/rooms_recycler_item.xml" value="0.33" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/xml/root_preferences.xml" value="0.23697916666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
