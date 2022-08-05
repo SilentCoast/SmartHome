@@ -26,9 +26,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -125,11 +127,13 @@ public class SettingFragment extends Fragment {
                     connection.setRequestMethod("DELETE");
                     connection.setRequestProperty("token",token);
 
-                    if(connection.getResponseCode()!=201){
+                    if(connection.getResponseCode()!=201&&connection.getResponseCode()!=200){
                         Log.i(TAG, className + ": response : "+connection.getResponseCode()+" "+connection.getResponseMessage());
                         alertDialog.setMessage(connection.getResponseCode()+" "+connection.getResponseMessage());
                         isError = true;
                     }
+
+
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     StringBuilder stringBuilder = new StringBuilder();
                     String line;

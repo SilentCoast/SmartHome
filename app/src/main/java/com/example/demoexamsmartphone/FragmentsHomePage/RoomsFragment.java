@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.demoexamsmartphone.Activities.AddRoomActivity;
 import com.example.demoexamsmartphone.Activities.InsideRoom;
 import com.example.demoexamsmartphone.Classes.Room;
 import com.example.demoexamsmartphone.R;
@@ -42,6 +43,7 @@ public class RoomsFragment extends Fragment {
     ArrayList<Room> rooms;
     ImageButton imageButtonAddRoom;
     roomsRecyclerAdapter adapter;
+    int LAUNCH_SECOND_ACT =1;
     public RoomsFragment(String token,String uuid){
         super(R.layout.fragment_rooms);
         this.token = token;
@@ -59,10 +61,7 @@ public class RoomsFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
         adapter = new roomsRecyclerAdapter(getContext(),rooms);
         recyclerView.setAdapter(adapter);
-        //get rooms from server
-        new ApiRequestGetRooms(view.getContext()).execute();
 
-        //click on specific room
         adapter.setClicklistener(new roomsRecyclerAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -84,18 +83,21 @@ public class RoomsFragment extends Fragment {
         imageButtonAddRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                Intent intent = new Intent(getActivity(), AddRoomActivity.class);
+//                startActivity(intent);
                 new ApiRequestAddRoom(view.getContext()).execute();
             }
         });
+        new ApiRequestGetRooms(view.getContext()).execute();
 
     }
 
     private class ApiRequestAddRoom extends AsyncTask<String,String,String>{
         private final ProgressDialog progressDialog;
-
+        Context context;
         public ApiRequestAddRoom(Context context){
             progressDialog = new ProgressDialog(context);
+            this.context = context;
         }
         @Override
         protected void onPreExecute() {
@@ -113,7 +115,7 @@ public class RoomsFragment extends Fragment {
                 URL url = new URL(getResources().getString(R.string.baseURL)+"/rooms");
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
-                connection.setRequestProperty("name","kitchenyyy");
+                connection.setRequestProperty("name","new room");
                 connection.setRequestProperty("type","kitchen");
                 connection.setRequestProperty("token",token);
                 connection.setRequestProperty("uuid",uuid);
@@ -145,13 +147,7 @@ public class RoomsFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("API", "add: "+s);
-            Room room = new Room();
-            room.setImage(getResources().getDrawable(R.drawable.icon_kitchen));
-            room.setName("Kitchenyyy");
-            room.setType("Kitchen");
-            room.setImage(getImageFromTypeOfRoom(room.getType()));
-            rooms.add(room);
-            adapter.notifyDataSetChanged();
+            new ApiRequestGetRooms(context).execute();
             if(progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
@@ -211,7 +207,7 @@ public class RoomsFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("API", "rooms: "+s);
-
+            rooms.clear();
             try {
                 JSONArray jsonArray = new JSONObject(s).getJSONArray("items");
                 for (int i = 0; i < jsonArray.length(); i++) {

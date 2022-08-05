@@ -25,4 +25,8 @@
         <item name="colorControlNormal">@color/grey</item>
         <item name="colorControlActivated">@color/dark_red</item>
     </style>
+    <style name="defaultBold">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

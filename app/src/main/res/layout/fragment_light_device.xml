@@ -7,181 +7,181 @@
     android:layout_height="match_parent"
     tools:context=".FragmentsDevices.LightDevice">
 
-    <ImageView
-        android:id="@+id/scale1"
-        android:layout_width="150dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="70dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale1"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="70dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale2"
-        android:layout_width="165dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale2"-->
+<!--        android:layout_width="165dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale1"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale3"
-        android:layout_width="180dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale3"-->
+<!--        android:layout_width="180dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale4"
-        android:layout_width="195dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale4"-->
+<!--        android:layout_width="195dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale3"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale5"
-        android:layout_width="210dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale5"-->
+<!--        android:layout_width="210dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale4"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale6"
-        android:layout_width="225dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale6"-->
+<!--        android:layout_width="225dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale5"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale7"
-        android:layout_width="240dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale7"-->
+<!--        android:layout_width="240dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale6"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale8"
-        android:layout_width="255dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale8"-->
+<!--        android:layout_width="255dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale7"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale9"
-        android:layout_width="270dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale9"-->
+<!--        android:layout_width="270dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale8"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale10"
-        android:layout_width="285dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale10"-->
+<!--        android:layout_width="285dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale9"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale11"
-        android:layout_width="300dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale11"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale10"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale12"
-        android:layout_width="315dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale12"-->
+<!--        android:layout_width="315dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale11"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale13"
-        android:layout_width="330dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale13"-->
+<!--        android:layout_width="330dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale12"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale14"
-        android:layout_width="345dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale14"-->
+<!--        android:layout_width="345dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale13"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale15"
-        android:layout_width="360dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale15"-->
+<!--        android:layout_width="360dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale14"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/scale16"
-        android:layout_width="375dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/dark_red"
-        android:src="@drawable/back_with_border"
-        app:layout_constraintBottom_toTopOf="@+id/scale15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/scale16"-->
+<!--        android:layout_width="375dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:background="@color/dark_red"-->
+<!--        android:src="@drawable/back_with_border"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scale15"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
     <TextView
         android:id="@+id/textView13"
@@ -252,5 +252,21 @@
             android:scaleType="centerCrop"
             android:src="@drawable/power_on_off" />
     </androidx.cardview.widget.CardView>
+
+    <SeekBar
+        android:id="@+id/seekBarLight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:max="100"
+        android:progress="3"
+        android:progressDrawable="@drawable/seekbar_style_light"
+        android:rotation="270"
+        android:thumb="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

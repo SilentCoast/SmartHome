@@ -39,21 +39,9 @@ public class Authorization extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authorization);
 
-
-
-
         sharedPreferences = getSharedPreferences("mPref", Context.MODE_PRIVATE);
 
-
-
         Log.i("FFF", String.valueOf(sharedPreferences.getBoolean("isAuthorized",false)));
-
-//        if(sharedPreferences.getBoolean("isAuthorized",false)){
-//
-//            Intent intent = new Intent(getApplicationContext(),HomePage.class);
-//            startActivity(intent);
-//            return;
-//        }
         textViewEmail = findViewById(R.id.textViewEmailInAuthorization);
         textViewPassword = findViewById(R.id.textViewPasswordInAuthorization);
 
@@ -82,7 +70,13 @@ public class Authorization extends AppCompatActivity {
     public void onBackPressed() {
         //do nothing
     }
+class cl extends AsyncTask <String, String, String>{
 
+    @Override
+    protected String doInBackground(String... strings) {
+        return null;
+    }
+}
     private class ApiRequestOptionsAuthorizateUser extends AsyncTask<String,String,String> {
 
         int responseCode = 201;
@@ -90,6 +84,7 @@ public class Authorization extends AppCompatActivity {
         public ApiRequestOptionsAuthorizateUser(Context context){
 
             dialog = new AlertDialog.Builder(context);
+
         }
 
         @Override

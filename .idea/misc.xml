@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/back_with_border.xml" value="0.2765625" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/back_with_border_and_rounded_corners.xml" value="0.243" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/border_shadow.xml" value="0.242" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/onoffstate.xml" value="0.242" />
@@ -12,19 +13,23 @@
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/seekbar_progress.xml" value="0.242" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/seekbar_progress_bg.xml" value="0.243" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/seekbar_style.xml" value="0.243" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/seekbar_style_fan.xml" value="0.2595" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/seekbar_style_light.xml" value="0.2595" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/seekbar_style_temperature.xml" value="0.262" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/drawable/seekbar_thumb_temperature.xml" value="0.196" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_add_room.xml" value="0.33" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_authorization.xml" value="0.33" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_inside_room.xml" value="0.25" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_kitchen.xml" value="0.25" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_main.xml" value="0.26766304347826086" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_registration.xml" value="0.3292572463768116" />
-        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_splash_screen.xml" value="0.32653985507246375" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/add_room_recycler_item.xml" value="0.5" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/devices_recycler_item.xml" value="0.75" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/dialog_error.xml" value="0.28020833333333334" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_blank.xml" value="0.20520833333333333" />
-        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_light_device.xml" value="0.22" />
+        <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_light_device.xml" value="0.33" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_light_in_kitchen.xml" value="0.33" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_maps.xml" value="0.2625" />
         <entry key="..\:/Games/AndreiJob/AndroidStudio/DemoExamSmartphone/app/src/main/res/layout/fragment_rooms.xml" value="0.33" />

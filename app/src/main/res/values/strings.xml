@@ -5,4 +5,15 @@
     <string name="baseURL">https://smarthome.madskill.ru</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="strarray">
+        <item>Kitchen</item>
+        <item>Bedroom</item>
+        <item>Bathroom</item>
+        <item>Office</item>
+        <item>TV room</item>
+        <item>Living Room</item>
+        <item>Garage</item>
+        <item>Toilet</item>
+        <item>Kid Room</item>
+    </string-array>
 </resources>

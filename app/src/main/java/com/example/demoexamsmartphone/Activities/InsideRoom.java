@@ -101,6 +101,7 @@ public class InsideRoom extends AppCompatActivity {
             }
         });
 
+       //recyclerViewDevices.findViewHolderForAdapterPosition(0).itemView.performClick();
         new ApiRequestGetDevices(this).execute();
     }
 
@@ -179,9 +180,9 @@ public class InsideRoom extends AppCompatActivity {
                     }
                     device.setId(jsonObject.getInt("id"));
                     devices.add(device);
+                    setImagesAndChangeFragment(0);
 
                 }
-                    setImagesAndChangeFragment(0);
                     adapter.notifyDataSetChanged();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -215,7 +216,7 @@ public class InsideRoom extends AppCompatActivity {
                 URL url = new URL(getResources().getString(R.string.baseURL)+"/devices");
                 connection = (HttpsURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
-                connection.setRequestProperty("type","Thermostat");
+                connection.setRequestProperty("type","LED");
                 connection.setRequestProperty("room",String.valueOf(idRoom));
                 connection.setRequestProperty("token",token);
                 connection.setRequestProperty("uuid",uuid);

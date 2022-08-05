@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoExamSmartphone"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Activities.AddRoomActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.Registration"
             android:exported="false" />
@@ -37,4 +39,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
