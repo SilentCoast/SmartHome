@@ -1,10 +1,11 @@
-# DemoExamSmartphone
 Smart Home
+
+**Сервер отключен и приложение не работает.**
 
 Android-приложение. Предназначено для удалённого управления устройствами умного дома.
 Данные о пользователе, устройствах и их состоянии хранятся на API сервере.
 
-**Сервер отключен и приложение не работает.**
+
 
 ![image](https://user-images.githubusercontent.com/94042423/183042340-88851dcf-9d08-421f-b1c1-2a138acd0521.png)
 ![image](https://user-images.githubusercontent.com/94042423/183042010-cecb0314-6e1c-492e-aad7-b59de91297c6.png)
