@@ -70,13 +70,7 @@ public class Authorization extends AppCompatActivity {
     public void onBackPressed() {
         //do nothing
     }
-class cl extends AsyncTask <String, String, String>{
 
-    @Override
-    protected String doInBackground(String... strings) {
-        return null;
-    }
-}
     private class ApiRequestOptionsAuthorizateUser extends AsyncTask<String,String,String> {
 
         int responseCode = 201;
@@ -171,11 +165,5 @@ class cl extends AsyncTask <String, String, String>{
 
         }
     }
-
-
-
-
-
-
 
 }

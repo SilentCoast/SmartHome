@@ -112,7 +112,6 @@ public class Registration extends AppCompatActivity {
                 urlConnection.setRequestProperty("password",textViewPassword.getText().toString());
                 urlConnection.setRequestProperty("uuid",sharedPreferences.getString("UUID",""));
                 if(urlConnection.getResponseCode()!=201){
-//                    throw new IOException(urlConnection.getResponseCode()+ " " + urlConnection.getResponseMessage());
                     Log.i("API","error:"+urlConnection.getResponseCode()+ " " + urlConnection.getResponseMessage());
                 }
                 //set input stream (get response)
