@@ -36,7 +36,7 @@ public class HomePage extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName), Context.MODE_PRIVATE);
         uuid = sharedPreferences.getString("UUID","none");
 
-        token = getIntent().getStringExtra("token");
+        token = sharedPreferences.getString("token","none");
         RoomsFragment roomsFragment = new RoomsFragment(token,uuid);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -97,6 +97,8 @@ public class HomePage extends AppCompatActivity {
                 btnStatics.setBackgroundResource(R.drawable.icon_stats_none);
             }
         });
+
+
 
     }
 }

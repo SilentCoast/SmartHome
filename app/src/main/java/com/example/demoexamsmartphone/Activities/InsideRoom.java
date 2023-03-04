@@ -86,7 +86,8 @@ public class InsideRoom extends AppCompatActivity {
         btnAddDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new ApiRequestAddDevice(view.getContext()).execute();
+                //TODO add device
+                //new ApiRequestAddDevice(view.getContext()).execute();
             }
         });
 
@@ -102,7 +103,8 @@ public class InsideRoom extends AppCompatActivity {
         });
 
        //recyclerViewDevices.findViewHolderForAdapterPosition(0).itemView.performClick();
-        new ApiRequestGetDevices(this).execute();
+        //TODO get devices
+        //new ApiRequestGetDevices(this).execute();
     }
 
     private class ApiRequestGetDevices extends AsyncTask<String,String,String>{

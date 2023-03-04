@@ -11,9 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.R;
 
 import org.json.JSONException;
@@ -24,6 +31,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -34,12 +43,20 @@ public class Authorization extends AppCompatActivity {
     TextView textViewEmail;
     TextView textViewPassword;
     SharedPreferences sharedPreferences;
+    private void StartHomePageActivity(){
+        Intent intent = new Intent(getApplicationContext(), HomePage.class);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authorization);
 
         sharedPreferences = getSharedPreferences("mPref", Context.MODE_PRIVATE);
+
+        if(sharedPreferences.getBoolean("isAuthorized",false)){
+            StartHomePageActivity();
+        }
 
         Log.i("FFF", String.valueOf(sharedPreferences.getBoolean("isAuthorized",false)));
         textViewEmail = findViewById(R.id.textViewEmailInAuthorization);
@@ -50,8 +67,41 @@ public class Authorization extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //autorization and go on homepage
-                new ApiRequestOptionsAuthorizateUser(v.getContext()).execute();
 
+                StringRequest AuthorizeUserRequest = new StringRequest(
+                        Request.Method.POST, getResources().getString(R.string.baseURL) + "/User/AuthorizeUser",
+                        new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("API", "registerUserResponse: " + response.toString());
+
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        Integer UserId = Integer.valueOf(response);
+                        editor.putBoolean("isAuthorized",true);
+                        editor.putString("token", UserId.toString())
+                                .apply();
+                        Toast.makeText(Authorization.this, "Authorized",
+                                Toast.LENGTH_LONG).show();
+
+                        StartHomePageActivity();
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("API", "REGERROR: " + error.toString());
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Login",textViewEmail.getText().toString());
+                        headers.put("Password",textViewPassword.getText().toString());
+                        return  headers;
+                    }
+                };
+                MySingleton.getInstance(Authorization.this).addToRequestQueue(AuthorizeUserRequest);
                 }
         });
 

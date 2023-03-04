@@ -47,14 +47,6 @@
             android:scaleType="centerCrop" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnRoutines"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/icon_routines_none"
-            android:scaleType="centerCrop" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnSetting"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

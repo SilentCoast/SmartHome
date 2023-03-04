@@ -17,8 +17,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.demoexamsmartphone.Activities.AddRoomActivity;
 import com.example.demoexamsmartphone.Activities.InsideRoom;
+import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.Classes.Room;
 import com.example.demoexamsmartphone.R;
 import com.example.demoexamsmartphone.Classes.roomsRecyclerAdapter;
@@ -83,13 +88,45 @@ public class RoomsFragment extends Fragment {
         imageButtonAddRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), AddRoomActivity.class);
-//                startActivity(intent);
-                new ApiRequestAddRoom(view.getContext()).execute();
+                Intent intent = new Intent(getActivity(), AddRoomActivity.class);
+                startActivity(intent);
             }
         });
-        new ApiRequestGetRooms(view.getContext()).execute();
+        //new ApiRequestGetRooms(view.getContext()).execute();
+        //TODO: get rooms
 
+        JsonArrayRequest GetRoomsRequest = new JsonArrayRequest(Request.Method.GET,
+                getResources().getString(R.string.baseURL) + "/Rooms/GetRooms",
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("API", "GetRooms: " + response.toString());
+                rooms.clear();
+                try {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        Room room = new Room();
+                        room.setType(jsonObject.getString("Type"));
+                        room.setName(jsonObject.getString("Name"));
+                        room.setId(jsonObject.getInt("Id"));
+                        room.setImage(getImageFromTypeOfRoom(room.getType()));
+                        rooms.add(room);
+                        adapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("API", "GetRoomsError: " + error.toString());
+                    }
+                });
+
+        MySingleton.getInstance(getActivity()).addToRequestQueue(GetRoomsRequest);
     }
 
     private class ApiRequestAddRoom extends AsyncTask<String,String,String>{

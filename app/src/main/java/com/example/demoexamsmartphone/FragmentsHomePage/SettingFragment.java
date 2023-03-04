@@ -43,12 +43,7 @@ public class SettingFragment extends Fragment {
         this.token = token;
         this.uuid = uuid;
     }
-//    public SettingFragment newInstance(String uuid,String token){
-//        SettingFragment settingFragment = new SettingFragment();
-//        settingFragment.token = token;
-//        settingFragment.uuid = uuid;
-//        return  settingFragment;
-//    }
+
     String token;
     String uuid;
     SharedPreferences sharedPreferences;
@@ -68,7 +63,8 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //save changes
-                new ApiRequestSendProfileInfo().execute();
+                //todo save profile info
+                //new ApiRequestSendProfileInfo().execute();
             }
         });
 
@@ -85,10 +81,12 @@ public class SettingFragment extends Fragment {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new ApiRequestSignOut(view.getContext()).execute();
+                //TODO: sign out
+                //new ApiRequestSignOut(view.getContext()).execute();
             }
         });
-        new ApiRequestGetProfileInfo().execute();
+        //TODO get profile info
+        //new ApiRequestGetProfileInfo().execute();
     }
 
         private class ApiRequestSignOut extends AsyncTask<String,String,String>{

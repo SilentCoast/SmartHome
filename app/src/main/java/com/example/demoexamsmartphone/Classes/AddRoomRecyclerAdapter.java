@@ -23,9 +23,7 @@ public class AddRoomRecyclerAdapter extends RecyclerView.Adapter<AddRoomRecycler
         this.rooms = rooms;
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener){
-        this.itemClickListener = itemClickListener;
-    }
+
 
     @NonNull
     @Override
@@ -45,13 +43,17 @@ public class AddRoomRecyclerAdapter extends RecyclerView.Adapter<AddRoomRecycler
         return rooms.size();
     }
 
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView textView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewIconInItemAddRoom);
-            textView = itemView.findViewById(R.id.textViewRoomNameInAddRoom);
+            textView = itemView.findViewById(R.id.textViewTypeAddRoom);
             itemView.setOnClickListener(this);
         }
 

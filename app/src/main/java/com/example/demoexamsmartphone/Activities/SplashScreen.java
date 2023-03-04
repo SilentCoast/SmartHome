@@ -3,13 +3,10 @@ package com.example.demoexamsmartphone.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,35 +16,15 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.demoexamsmartphone.Activities.Authorization;
-import com.example.demoexamsmartphone.Classes.ApiRequestGetRooms;
+import com.android.volley.toolbox.StringRequest;
 import com.example.demoexamsmartphone.Classes.MySingleton;
-import com.example.demoexamsmartphone.Classes.WebRequestController;
 import com.example.demoexamsmartphone.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class SplashScreen extends AppCompatActivity {
 ImageView imageView;
@@ -72,24 +49,17 @@ SharedPreferences sharedPreferences;
         //set uuid
         sharedPreferences = getSharedPreferences(getResources().getString(R.string.sharedPrefName),Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("UUID", String.valueOf(UUID.randomUUID()).toUpperCase()).apply();
+        editor.putString("UUID", String.valueOf(UUID.randomUUID()).toUpperCase())
+                .apply();
         Log.i("API", "UUID: "+sharedPreferences.getString("UUID",""));
 
-        JSONObject postdata= new JSONObject();
-        try {
-        postdata.put("Uuid",sharedPreferences.getString("UUID","none"));
-        postdata.put("AppId",getApplicationInfo().packageName);
-        postdata.put("DeviceName", Build.BRAND.toUpperCase()+" "+Build.MODEL.toUpperCase());
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        JsonObjectRequest regMobileRequest = new JsonObjectRequest(Request.Method.POST,
-                getResources().getString(R.string.baseURL) + "/Mobile/RegMobiles", postdata, new Response.Listener<JSONObject>() {
+
+        StringRequest regMobileRequest = new StringRequest(Request.Method.POST,
+                getResources().getString(R.string.baseURL) + "/Mobile/RegMobile", new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
-                Log.i("API", "REGDATA: " + response.toString());
+            public void onResponse(String response) {
+                Log.i("API", "REGDATAMobile: " + response.toString());
                 Intent intent = new Intent(getApplicationContext(), Authorization.class);
                 startActivity(intent);
             }
@@ -97,8 +67,27 @@ SharedPreferences sharedPreferences;
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("API", "REGERROR: " + error.toString());
+                AlertDialog.Builder builder = new AlertDialog.Builder(SplashScreen.this);
+                builder.setTitle("Error")
+                        .setMessage(error.getMessage())
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Закрываем диалоговое окно
+                                dialog.cancel();
+                            }
+                        });
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Uuid",sharedPreferences.getString("UUID","none"));
+                headers.put("AppId",getApplicationInfo().packageName);
+                headers.put("DeviceName", Build.BRAND.toUpperCase()+" "+Build.MODEL.toUpperCase());
+                return  headers;
+            }
+        };
 
 
         MySingleton.getInstance(this).addToRequestQueue(regMobileRequest);

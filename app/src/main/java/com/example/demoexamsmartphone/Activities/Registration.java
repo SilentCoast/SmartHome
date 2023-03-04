@@ -13,10 +13,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.R;
 
 import org.json.JSONException;
@@ -28,6 +35,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Registration extends AppCompatActivity {
     Button buttonNewResident;
@@ -37,12 +47,15 @@ public class Registration extends AppCompatActivity {
     TextView textViewPassword;
     SharedPreferences sharedPreferences;
     AlertDialog.Builder alertDialog;
+    String baseUrl;
     boolean unsuccesRegistration = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        baseUrl = getResources().getString(R.string.baseURL);
 
         alertDialog = new Builder(this);
         alertDialog.setTitle("Warning!");
@@ -66,9 +79,36 @@ public class Registration extends AppCompatActivity {
         buttonNewResident.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("API", "reg click new resident");
+                StringRequest RegisterUserRequest = new StringRequest(
+                        Request.Method.POST, baseUrl + "/User/RegisterUser", new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("API", "registerUserResponse: " + response.toString());
 
-                new PostRegisterUser(view.getContext()).execute();
+                            onBackPressed();
+                            Toast.makeText(Registration.this, "User registered. Continue with authorization",
+                                    Toast.LENGTH_LONG).show();
 
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("API", "REGERROR: " + error.toString());
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("Name",textViewName.getText().toString());
+                        headers.put("Login",textViewEmail.getText().toString());
+                        headers.put("Password",textViewPassword.getText().toString());
+                        return  headers;
+                    }
+                };
+
+                MySingleton.getInstance(Registration.this).addToRequestQueue(RegisterUserRequest);
 
             }
         });
