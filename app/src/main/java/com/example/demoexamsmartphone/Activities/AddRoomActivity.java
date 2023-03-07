@@ -5,6 +5,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,7 +78,6 @@ public class AddRoomActivity extends AppCompatActivity {
         btnSaveRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO save room go to home page
                 SharedPreferences sharedPreferences = getSharedPreferences("mPref",MODE_PRIVATE);
 
                 StringRequest AddRoomRequest = new StringRequest(Request.Method.POST,
@@ -84,14 +86,23 @@ public class AddRoomActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 Log.i("API", "Room added with Id: " + response.toString());
-                                onBackPressed();
+
+                                Intent intent = new Intent(AddRoomActivity.this,HomePage.class);
+                                AddRoomActivity.this.startActivity(intent);
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.i("API", "error: " + error.toString());
-                                //TODO show dialog error
+                                AlertDialog.Builder builder = new AlertDialog.Builder(AddRoomActivity.this);
+                                builder.setTitle("Error")
+                                        .setMessage(error.getMessage())
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
                             }
                         })
                         {

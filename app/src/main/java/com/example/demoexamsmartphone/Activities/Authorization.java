@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.demoexamsmartphone.Classes.MyErrorAlertDialog;
 import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.R;
 
@@ -90,6 +91,7 @@ public class Authorization extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("API", "REGERROR: " + error.toString());
+                        MyErrorAlertDialog.ShowAlertDialog(Authorization.this,error);
                     }
                 })
                 {

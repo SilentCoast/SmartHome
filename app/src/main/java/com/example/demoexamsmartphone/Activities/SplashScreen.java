@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.demoexamsmartphone.Classes.MyErrorAlertDialog;
 import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.R;
 
@@ -67,15 +68,7 @@ SharedPreferences sharedPreferences;
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("API", "REGERROR: " + error.toString());
-                AlertDialog.Builder builder = new AlertDialog.Builder(SplashScreen.this);
-                builder.setTitle("Error")
-                        .setMessage(error.getMessage())
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // Закрываем диалоговое окно
-                                dialog.cancel();
-                            }
-                        });
+                MyErrorAlertDialog.ShowAlertDialog(SplashScreen.this,error);
             }
         })
         {

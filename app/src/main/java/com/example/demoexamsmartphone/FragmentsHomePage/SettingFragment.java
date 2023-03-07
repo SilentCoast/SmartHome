@@ -17,8 +17,17 @@ import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.demoexamsmartphone.Activities.Authorization;
+import com.example.demoexamsmartphone.Activities.SplashScreen;
+import com.example.demoexamsmartphone.Classes.MyErrorAlertDialog;
+import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.R;
 
 import org.json.JSONArray;
@@ -26,12 +35,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -58,13 +67,42 @@ public class SettingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnSave = view.findViewById(R.id.btnSave);
+        btnSave = view.findViewById(R.id.btnSaveProfile);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //save changes
                 //todo save profile info
-                //new ApiRequestSendProfileInfo().execute();
+                StringRequest UpdateProfileInfoRequest = new StringRequest(
+                        getResources().getString(R.string.baseURL) + "/Settings/UpdateSetting",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.i("API", "Setting Id: "+response);
+                                Toast.makeText(getActivity(), "Info saved", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                MyErrorAlertDialog.ShowAlertDialog(getActivity(),error);
+                                Log.i("API", "Setting Id: "+error.toString());
+                            }
+                        }
+                ){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap headers = new HashMap();
+                        headers.put("token",token);
+                        headers.put("Email",textViewEmail.getText().toString());
+                        headers.put("Username",textViewName.getText().toString());
+                        headers.put("DateOfBirth",textViewDateOfBirth.getText().toString());
+                        headers.put("PhoneNumber",textViewPhone.getText().toString());
+                        headers.put("Gender",textViewGender.getText().toString());
+                        return headers;
+                    }
+                };
+                MySingleton.getInstance(getActivity()).addToRequestQueue(UpdateProfileInfoRequest);
             }
         });
 
@@ -81,12 +119,57 @@ public class SettingFragment extends Fragment {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: sign out
-                //new ApiRequestSignOut(view.getContext()).execute();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isAuthorized",false);
+                editor.apply();
+                Intent intent = new Intent(getActivity(),Authorization.class);
+                getActivity().startActivity(intent);
+                Toast.makeText(getActivity(), "Signed out",
+                        Toast.LENGTH_LONG).show();
             }
         });
-        //TODO get profile info
-        //new ApiRequestGetProfileInfo().execute();
+
+        JsonObjectRequest GetProfileInfoRequest = new JsonObjectRequest(
+                getResources().getString(R.string.baseURL) + "/Settings/GetSetting",
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            textViewEmail.setText(response.getString("Email"));
+                            textViewDateOfBirth.setText(response.getString("DateOfBirth"));
+                            textViewName.setText(response.getString("Username"));
+                            textViewPhone.setText(response.getString("PhoneNumber"));
+                            textViewGender.setText(response.getString("Gender"));
+                            Log.i("API", "getProfile: "+response.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("Error")
+                                .setMessage(error.getMessage())
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // Закрываем диалоговое окно
+                                        dialog.cancel();
+                                    }
+                                });
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("token",token);
+                return headers;
+            }
+        };
+        MySingleton.getInstance(getActivity()).addToRequestQueue(GetProfileInfoRequest);
     }
 
         private class ApiRequestSignOut extends AsyncTask<String,String,String>{

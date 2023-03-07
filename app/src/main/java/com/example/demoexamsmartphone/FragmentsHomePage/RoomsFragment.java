@@ -1,7 +1,9 @@
 package com.example.demoexamsmartphone.FragmentsHomePage;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -23,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.demoexamsmartphone.Activities.AddRoomActivity;
 import com.example.demoexamsmartphone.Activities.InsideRoom;
+import com.example.demoexamsmartphone.Classes.MyErrorAlertDialog;
 import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.Classes.Room;
 import com.example.demoexamsmartphone.R;
@@ -92,11 +95,9 @@ public class RoomsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        //new ApiRequestGetRooms(view.getContext()).execute();
-        //TODO: get rooms
 
         JsonArrayRequest GetRoomsRequest = new JsonArrayRequest(Request.Method.GET,
-                getResources().getString(R.string.baseURL) + "/Rooms/GetRooms",
+                getResources().getString(R.string.baseURL) + "/Rooms/GetRooms/"+token,
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -123,6 +124,7 @@ public class RoomsFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("API", "GetRoomsError: " + error.toString());
+                        MyErrorAlertDialog.ShowAlertDialog(getActivity(),error);
                     }
                 });
 
