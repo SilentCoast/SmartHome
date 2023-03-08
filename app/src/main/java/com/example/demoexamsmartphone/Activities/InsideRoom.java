@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +18,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.demoexamsmartphone.Classes.Device;
+import com.example.demoexamsmartphone.Classes.MyErrorAlertDialog;
+import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.Classes.devicesRecyclerAdapter;
 import com.example.demoexamsmartphone.FragmentsDevices.LightDevice;
 import com.example.demoexamsmartphone.FragmentsDevices.ThermostatDevice;
@@ -31,6 +43,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -41,12 +55,13 @@ public class InsideRoom extends AppCompatActivity {
     TextView textViewTitle;
     String token;
     String uuid;
-    int idRoom;
+    Integer idRoom;
     ImageButton btnAddDevice;
     RecyclerView recyclerViewDevices;
     devicesRecyclerAdapter adapter;
     ArrayList<Device> devices = new ArrayList<>();
-
+    String baseURL;
+    String TAG = "API";
 
 
 
@@ -57,7 +72,7 @@ public class InsideRoom extends AppCompatActivity {
 
 
 
-
+        baseURL = getResources().getString(R.string.baseURL);
         textViewTitle = findViewById(R.id.textViewTitleInsideRoom);
         textViewTitle.setText(getIntent().getStringExtra("name")+" ("+getIntent().getStringExtra("type")+")");
         token = getIntent().getStringExtra("token");
@@ -80,14 +95,123 @@ public class InsideRoom extends AppCompatActivity {
 
             }
         });
+        JsonArrayRequest GetDevicesRequest = new JsonArrayRequest(
+                baseURL + "/Devices/GetDevices/"+idRoom,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i(TAG, "GetDevices: "+response.toString());
+                        devices.clear();
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                Device device = new Device();
+                                if(jsonObject.getString("Type").equals("LED")){
+                                    device.setType(jsonObject.getString("Type"));
+                                    device.setLight_lm(jsonObject.getString("LightBrightness"));
+                                }
+                                else{
+                                    device.setType("Thermostat");
+                                    device.setTemperature(jsonObject.getString("Temperature"));
+                                    device.setSpeed_fan(jsonObject.getString("FanSpeed"));
+                                }
+                                try{
+                                    device.setWorkState(jsonObject.getBoolean("IsActive"));
+                                }catch (JSONException ignored){
+                                }
+                                device.setId(jsonObject.getInt("Id"));
+                                devices.add(device);
+                                setImagesAndChangeFragment(0);
 
+                            }
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        MyErrorAlertDialog.ShowAlertDialog(InsideRoom.this,error);
+                    }
+                }
+        );
+        MySingleton.getInstance(InsideRoom.this).addToRequestQueue(GetDevicesRequest);
 
         btnAddDevice = findViewById(R.id.btnAddDevice);
         btnAddDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO add device
-                //new ApiRequestAddDevice(view.getContext()).execute();
+                AlertDialog.Builder builder = new AlertDialog.Builder(InsideRoom.this);
+                builder.setTitle("Add device")
+                        .setMessage("Choose Device to add")
+                        .setNeutralButton("LED", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+
+                                StringRequest AddLEDDeviceRequest = new StringRequest(Request.Method.POST,
+                                        baseURL + "/Devices/AddDevice",
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                Log.i(TAG, "Added LED device Id: "+response);
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                MyErrorAlertDialog.ShowAlertDialog(InsideRoom.this,error);
+                                            }
+                                        }){
+                                    @Override
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        HashMap headers = new HashMap();
+                                        headers.put("roomId",idRoom.toString());
+                                        headers.put("Type","LED");
+                                        return headers;
+                                    }
+                                };
+                                MySingleton g = MySingleton.getInstance(InsideRoom.this);
+                                g.addToRequestQueue(AddLEDDeviceRequest);
+                                g.addToRequestQueue(GetDevicesRequest);
+                                dialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("Thermostat", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                StringRequest AddThermostatDeviceRequest = new StringRequest(Request.Method.POST,
+                                        baseURL + "/Devices/AddDevice",
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                Log.i(TAG, "Added Thermostat device Id: "+response);
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                MyErrorAlertDialog.ShowAlertDialog(InsideRoom.this,error);
+                                            }
+                                        }){
+                                    @Override
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        HashMap headers = new HashMap();
+                                        headers.put("roomId",idRoom.toString());
+                                        headers.put("Type","Thermostat");
+                                        return headers;
+                                    }
+                                };
+                                MySingleton g = MySingleton.getInstance(InsideRoom.this);
+                                g.addToRequestQueue(AddThermostatDeviceRequest);
+                                g.addToRequestQueue(GetDevicesRequest);
+
+                                dialogInterface.cancel();
+                            }
+                        });
+                builder.show();
             }
         });
 
@@ -103,8 +227,8 @@ public class InsideRoom extends AppCompatActivity {
         });
 
        //recyclerViewDevices.findViewHolderForAdapterPosition(0).itemView.performClick();
-        //TODO get devices
-        //new ApiRequestGetDevices(this).execute();
+
+
     }
 
     private class ApiRequestGetDevices extends AsyncTask<String,String,String>{
@@ -247,7 +371,7 @@ public class InsideRoom extends AppCompatActivity {
             if(progressDialog!=null){
                 progressDialog.dismiss();
             }
-            new ApiRequestGetDevices(context).execute();
+            //new ApiRequestGetDevices(context).execute();
         }
     }
 

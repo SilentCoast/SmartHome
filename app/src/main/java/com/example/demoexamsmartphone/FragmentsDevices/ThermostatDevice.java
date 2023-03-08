@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +17,22 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.demoexamsmartphone.Classes.Device;
+import com.example.demoexamsmartphone.Classes.MyErrorAlertDialog;
+import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -33,11 +43,16 @@ public class ThermostatDevice extends Fragment {
     String token;
     String uuid;
     Device device;
+    String baseURL;
     public ThermostatDevice(String token,String uuid,Device device){
         super(R.layout.fragment_thermostat_device);
         this.device = device;
         this.token = token;
         this.uuid = uuid;
+
+    }
+    public ThermostatDevice(){
+        super(R.layout.fragment_thermostat_device);
 
     }
 
@@ -49,13 +64,28 @@ public class ThermostatDevice extends Fragment {
 
     CircularSeekBar seekBarTemperature;
     SwitchCompat switchState;
+    StringRequest SendDeviceDataRequest;
 
+public void SetDefaults(){
+    Log.i("gg", "temperaure = "+device.getTemperature());
+    if(!TextUtils.isEmpty(device.getTemperature())){
+        seekBarTemperature.setProgress(Float.parseFloat(device.getTemperature()));
+        textViewTemperature.setText(device.getTemperature());
+    }
+    if(!TextUtils.isEmpty(device.getSpeed_fan())){
+        seekBarFan.setProgress(Integer.parseInt(String.valueOf(Math.round(Float.parseFloat(device.getSpeed_fan())))));
+    }
+
+    switchState.setChecked(device.isWorkState());
+
+}
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //new ApiRequestGetDeviceData().execute();
+
         textViewTemperature = view.findViewById(R.id.textViewTemperature);
 
+        baseURL = getResources().getString(R.string.baseURL);
         imageButtonHeating = view.findViewById(R.id.imageButtonHeating);
         imageButtonHeating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,11 +123,16 @@ public class ThermostatDevice extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 device.setSpeed_fan(String.valueOf(seekBar.getProgress()));
-                new ApiRequestSendDeviceData().execute();
+                //TODO send device data
+                MySingleton.getInstance(getActivity()).addToRequestQueue(SendDeviceDataRequest);
             }
         });
 
         seekBarTemperature = view.findViewById(R.id.seekBarTemperature);
+        if(TextUtils.isEmpty(device.getTemperature())){
+            seekBarTemperature.setProgress(Float.parseFloat(device.getTemperature()));
+        }
+
         seekBarTemperature.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
             @Override
             public void onProgressChanged(@Nullable CircularSeekBar circularSeekBar, float v, boolean b) {
@@ -108,7 +143,9 @@ public class ThermostatDevice extends Fragment {
             @Override
             public void onStopTrackingTouch(@Nullable CircularSeekBar circularSeekBar) {
                 device.setTemperature(String.valueOf((int)(circularSeekBar.getProgress()*temperatureMnozhitel)));
-                new ApiRequestSendDeviceData().execute();
+                //new ApiRequestSendDeviceData().execute();
+                //TODO send device data
+                MySingleton.getInstance(getActivity()).addToRequestQueue(SendDeviceDataRequest);
             }
 
             @Override
@@ -124,12 +161,37 @@ public class ThermostatDevice extends Fragment {
                 device.setWorkState(switchState.isChecked());
             }
         });
-
-        seekBarTemperature.setProgress(Float.parseFloat(device.getTemperature()));
-        textViewTemperature.setText(device.getTemperature());
-        seekBarFan.setProgress(Integer.parseInt(device.getSpeed_fan()));
-        switchState.setChecked(device.isWorkState());
+        SetDefaults();
+        SendDeviceDataRequest = new StringRequest(
+                Request.Method.PATCH,
+                baseURL + "/Devices/UpdateDevice",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("API", "SendThermoInfo: "+response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        MyErrorAlertDialog.ShowAlertDialog(getActivity(),error);
+                    }
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Type",device.getType());
+                headers.put("FanSpeed",device.getSpeed_fan());
+                headers.put("IsActive",String.valueOf( device.isWorkState()));
+                headers.put("Temperature",device.getTemperature());
+                headers.put("Id",String.valueOf(device.getId()));
+                return  headers;
+            }
+        };
     }
+
+
 
     private class ApiRequestSendDeviceData extends AsyncTask<String,String,String>{
         String TAG = "API";

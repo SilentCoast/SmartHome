@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -73,7 +74,7 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
                 //save changes
                 //todo save profile info
-                StringRequest UpdateProfileInfoRequest = new StringRequest(
+                StringRequest UpdateProfileInfoRequest = new StringRequest(Request.Method.POST,
                         getResources().getString(R.string.baseURL) + "/Settings/UpdateSetting",
                         new Response.Listener<String>() {
                             @Override
