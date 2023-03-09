@@ -108,12 +108,14 @@ public class InsideRoom extends AppCompatActivity {
                                 Device device = new Device();
                                 if(jsonObject.getString("Type").equals("LED")){
                                     device.setType(jsonObject.getString("Type"));
-                                    device.setLight_lm(jsonObject.getString("LightBrightness"));
+                                        device.setLight_lm(jsonObject.getInt("LightBrightness"));
+
+
                                 }
                                 else{
                                     device.setType("Thermostat");
-                                    device.setTemperature(jsonObject.getString("Temperature"));
-                                    device.setSpeed_fan(jsonObject.getString("FanSpeed"));
+                                    device.setTemperature(jsonObject.getInt("Temperature"));
+                                    device.setSpeed_fan(jsonObject.getInt("FanSpeed"));
                                 }
                                 try{
                                     device.setWorkState(jsonObject.getBoolean("IsActive"));
@@ -293,12 +295,12 @@ public class InsideRoom extends AppCompatActivity {
                     Device device = new Device();
                     if(jsonObject.getString("type").equals("LED")){
                         device.setType(jsonObject.getString("type"));
-                        device.setLight_lm(jsonObject.getString("light_lm"));
+                        device.setLight_lm(Integer.valueOf(jsonObject.getString("light_lm")));
                     }
                     else{
                         device.setType("Thermostat");
-                        device.setTemperature(jsonObject.getString("temperature"));
-                        device.setSpeed_fan(jsonObject.getString("speed_fan"));
+                        device.setTemperature(Integer.valueOf(jsonObject.getString("temperature")));
+                        device.setSpeed_fan(Integer.valueOf(jsonObject.getString("speed_fan")));
                     }
                     try{
                         device.setWorkState(jsonObject.getBoolean("off"));
@@ -406,7 +408,7 @@ public class InsideRoom extends AppCompatActivity {
             case "LED":
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frameLayoutInsideRoom,new LightDevice())
+                        .replace(R.id.frameLayoutInsideRoom,new LightDevice(token,devices.get(position)))
                         .commit();
                 break;
             case "Thermostat":

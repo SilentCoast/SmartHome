@@ -5,13 +5,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 public class Device {
+    public Device(){
+
+    }
     private int textColor;
     private Drawable image;
     private String type;
     private int id;
-    private String speed_fan;
-    private String temperature;
-    private String light_lm;
+    private Integer speed_fan;
+    private Integer temperature;
+    private Integer light_lm;
     private boolean workState;
 
     public void setId(int id) {
@@ -30,27 +33,27 @@ public class Device {
         return type;
     }
 
-    public String getLight_lm() {
+    public Integer getLight_lm() {
         return light_lm;
     }
 
-    public String getSpeed_fan() {
+    public Integer getSpeed_fan() {
         return speed_fan;
     }
 
-    public String getTemperature() {
+    public Integer getTemperature() {
         return temperature;
     }
 
-    public void setLight_lm(String light_lm) {
+    public void setLight_lm(Integer light_lm) {
         this.light_lm = light_lm;
     }
 
-    public void setSpeed_fan(String speed_fan) {
+    public void setSpeed_fan(Integer speed_fan) {
         this.speed_fan = speed_fan;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(Integer temperature) {
         this.temperature = temperature;
     }
 

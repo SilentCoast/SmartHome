@@ -68,13 +68,11 @@ public class ThermostatDevice extends Fragment {
 
 public void SetDefaults(){
     Log.i("gg", "temperaure = "+device.getTemperature());
-    if(!TextUtils.isEmpty(device.getTemperature())){
-        seekBarTemperature.setProgress(Float.parseFloat(device.getTemperature()));
-        textViewTemperature.setText(device.getTemperature());
-    }
-    if(!TextUtils.isEmpty(device.getSpeed_fan())){
-        seekBarFan.setProgress(Integer.parseInt(String.valueOf(Math.round(Float.parseFloat(device.getSpeed_fan())))));
-    }
+        seekBarTemperature.setProgress(Float.parseFloat(device.getTemperature().toString()));
+        textViewTemperature.setText(device.getTemperature().toString());
+
+        seekBarFan.setProgress(device.getSpeed_fan());
+
 
     switchState.setChecked(device.isWorkState());
 
@@ -93,7 +91,7 @@ public void SetDefaults(){
                 imageButtonCool.setImageDrawable(getResources().getDrawable(R.drawable.cool_off));
                 imageButtonHeating.setImageDrawable(getResources().getDrawable(R.drawable.heating_on));
                 temperatureMnozhitel = 1;
-                textViewTemperature.setText(String.valueOf((int) seekBarTemperature.getProgress()));
+                textViewTemperature.setText(String.valueOf(Math.round( seekBarTemperature.getProgress())));
             }
         });
         imageButtonCool = view.findViewById(R.id.imageButtonCool);
@@ -122,16 +120,15 @@ public void SetDefaults(){
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                device.setSpeed_fan(String.valueOf(seekBar.getProgress()));
-                //TODO send device data
+                device.setSpeed_fan(seekBar.getProgress());
+
                 MySingleton.getInstance(getActivity()).addToRequestQueue(SendDeviceDataRequest);
             }
         });
 
         seekBarTemperature = view.findViewById(R.id.seekBarTemperature);
-        if(TextUtils.isEmpty(device.getTemperature())){
-            seekBarTemperature.setProgress(Float.parseFloat(device.getTemperature()));
-        }
+            seekBarTemperature.setProgress(Float.parseFloat(device.getTemperature().toString()));
+
 
         seekBarTemperature.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
             @Override
@@ -142,9 +139,8 @@ public void SetDefaults(){
 
             @Override
             public void onStopTrackingTouch(@Nullable CircularSeekBar circularSeekBar) {
-                device.setTemperature(String.valueOf((int)(circularSeekBar.getProgress()*temperatureMnozhitel)));
-                //new ApiRequestSendDeviceData().execute();
-                //TODO send device data
+                device.setTemperature(Math.round(circularSeekBar.getProgress())*temperatureMnozhitel);
+
                 MySingleton.getInstance(getActivity()).addToRequestQueue(SendDeviceDataRequest);
             }
 
@@ -182,9 +178,9 @@ public void SetDefaults(){
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap headers = new HashMap();
                 headers.put("Type",device.getType());
-                headers.put("FanSpeed",device.getSpeed_fan());
+                headers.put("FanSpeed",device.getSpeed_fan().toString());
                 headers.put("IsActive",String.valueOf( device.isWorkState()));
-                headers.put("Temperature",device.getTemperature());
+                headers.put("Temperature",device.getTemperature().toString());
                 headers.put("Id",String.valueOf(device.getId()));
                 return  headers;
             }
@@ -203,14 +199,14 @@ public void SetDefaults(){
             try {
                 URL url = new URL(getResources().getString(R.string.baseURL)+"/devices/Thermostat");
                 connection = (HttpsURLConnection) url.openConnection();
-                connection.setRequestMethod("PATCH");
-                connection.setRequestProperty("name",device.getType());
-                connection.setRequestProperty("speed_fan",device.getSpeed_fan());
-                connection.setRequestProperty("off",String.valueOf( device.isWorkState()));
-                connection.setRequestProperty("temperature",device.getTemperature());
-                connection.setRequestProperty("id",String.valueOf(device.getId()));
-                connection.setRequestProperty("token",token);
-                connection.setRequestProperty("uuid",uuid);
+//                connection.setRequestMethod("PATCH");
+//                connection.setRequestProperty("name",device.getType());
+//                connection.setRequestProperty("speed_fan",device.getSpeed_fan());
+//                connection.setRequestProperty("off",String.valueOf( device.isWorkState()));
+//                connection.setRequestProperty("temperature",device.getTemperature());
+//                connection.setRequestProperty("id",String.valueOf(device.getId()));
+//                connection.setRequestProperty("token",token);
+//                connection.setRequestProperty("uuid",uuid);
 
                 Log.i(TAG, className+" "+ connection.getResponseCode()+" "+ connection.getResponseMessage());
 
