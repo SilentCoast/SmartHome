@@ -1,4 +1,4 @@
-# SmartHome App
+# SmartHome
 
 Welcome to SmartHome, your ultimate solution for controlling all your smart devices at home! This app simplifies the management of your smart appliances, offering seamless control and customization options to enhance your living experience.
 
