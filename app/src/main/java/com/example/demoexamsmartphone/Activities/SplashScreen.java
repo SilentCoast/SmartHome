@@ -1,16 +1,14 @@
 package com.example.demoexamsmartphone.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -87,153 +85,4 @@ SharedPreferences sharedPreferences;
 
 
     }
-
-    //deprecated
-//    private class POSTRequestRegisterApp extends AsyncTask<String, String, String> {
-//        Context context;
-//        public POSTRequestRegisterApp(Context context){
-//            this.context = context;
-//        }
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        protected String doInBackground(String... params) {
-//
-//            try {
-//                JSONObject postdata = new JSONObject();
-//                // postdata.put("uuid",sharedPreferences.getString("UUID",""));
-//                postdata.put("appId",getApplicationInfo().packageName);
-//                postdata.put("competitor","Competitor-2");
-//
-//                URL url = new URL(getResources().getString(R.string.baseURL)+"app");
-//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                connection.setRequestMethod("POST");
-//                connection.setRequestProperty("Content-Type","application/json");
-//
-//
-//                OutputStream out = new BufferedOutputStream(connection.getOutputStream());
-//                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
-//                writer.write(postdata.toString());
-//                writer.flush();
-//
-//
-//                Log.i("API","regApp: "+connection.getResponseCode()+ " " + connection.getResponseMessage());
-//
-//
-//                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//
-//                StringBuilder stringBuilder = new StringBuilder();
-//                String line;
-//
-//                while ((line = reader.readLine()) != null) {
-//                    stringBuilder.append(line).append("\n");
-//
-//                }
-//                reader.close();
-//                connection.disconnect();
-//                return stringBuilder.toString();
-//
-//
-//            }
-//            catch (IOException | JSONException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            Log.i("API", "RegApp: "+ result);
-//            new POSTRequestRegisterMobile(context).execute();
-//
-//        }
-//    }
-//    private class POSTRequestRegisterMobile extends AsyncTask<String, String, String> {
-//        AlertDialog.Builder dialog;
-//        Context context;
-//        public POSTRequestRegisterMobile(Context context){
-//            this.context = context;
-//            dialog = new AlertDialog.Builder(context);
-//        }
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        protected String doInBackground(String... params) {
-//
-//            try {
-//                JSONObject postdata = new JSONObject();
-//                postdata.put("Uuid",sharedPreferences.getString("UUID","none"));
-//                postdata.put("AppId",getApplicationInfo().packageName);
-//                postdata.put("DeviceName", Build.BRAND.toUpperCase()+" "+Build.MODEL.toUpperCase());
-//                Log.i("API", "regData: "+ postdata.toString());
-//                URL url = new URL(getResources().getString(R.string.baseURL)+"/Mobile/RegisterMobile");
-//                Log.i("API","finalURL: "+url.toString());
-//                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-//                connection.setRequestMethod("POST");
-//                connection.setRequestProperty("Content-Type","application/json");
-//                if(connection.getResponseCode()!=201){
-//                    Log.i("API","error:"+connection.getResponseCode()+ " " + connection.getResponseMessage());
-//
-//                }
-//                OutputStream out = new BufferedOutputStream(connection.getOutputStream());
-//                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8));
-//                writer.write(postdata.toString());
-//                writer.flush();
-//
-//                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//
-//                StringBuilder stringBuilder = new StringBuilder();
-//                String line;
-//
-//                while ((line = reader.readLine()) != null) {
-//                    stringBuilder.append(line).append("\n");
-//
-//                }
-//                reader.close();
-//                connection.disconnect();
-//                return stringBuilder.toString();
-//
-//            }
-//            catch (IOException | JSONException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            try {
-//                String keyDevice;
-//                if(result == null) {
-//                    dialog.setTitle("Error");
-//                    dialog.setMessage("Server is unavailable, try again later");
-//                    dialog.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            //close app
-//                            dialogInterface.cancel();
-//                            System.exit(0);
-//                        }
-//                    });
-//                    dialog.show();
-//                    return;
-//                }
-//                Log.i("API", "result: "+ result);
-//                JSONObject jsonObject = new JSONObject(result);
-//                keyDevice = jsonObject.getString("keyDevice");
-//                Log.i("API", "keyDevice: "+ keyDevice);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//    }
-
-
-
-
 }

@@ -1,10 +1,5 @@
 package com.example.demoexamsmartphone.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,11 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.demoexamsmartphone.Classes.AddRoomRecyclerAdapter;
 import com.example.demoexamsmartphone.Classes.MySingleton;
@@ -116,14 +115,9 @@ public class AddRoomActivity extends AppCompatActivity {
                             }
                         };
                 MySingleton.getInstance(AddRoomActivity.this).addToRequestQueue(AddRoomRequest);
-
-
             }
         });
-
     }
-
-
 
     public void setImages(int position){
         for (int i = 0; i < rooms.size(); i++) {
@@ -148,7 +142,5 @@ public class AddRoomActivity extends AppCompatActivity {
             }
         }
         //adapter.notifyDataSetChanged();
-
     }
-
 }

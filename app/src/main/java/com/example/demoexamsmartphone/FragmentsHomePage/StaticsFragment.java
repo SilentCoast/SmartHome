@@ -17,15 +17,10 @@ public class StaticsFragment extends Fragment {
     }
 
     TextView textViewTestAPI;
-    String urlBase = "https://smarthome.madskill.ru";
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         textViewTestAPI = view.findViewById(R.id.textViewTestAPI);
-
-
     }
 
 }

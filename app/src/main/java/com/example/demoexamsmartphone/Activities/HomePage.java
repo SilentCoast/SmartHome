@@ -97,8 +97,5 @@ public class HomePage extends AppCompatActivity {
                 btnStatics.setBackgroundResource(R.drawable.icon_stats_none);
             }
         });
-
-
-
     }
 }

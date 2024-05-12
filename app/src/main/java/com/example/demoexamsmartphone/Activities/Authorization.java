@@ -85,7 +85,6 @@ public class Authorization extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
                         StartHomePageActivity();
-
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -130,7 +129,6 @@ public class Authorization extends AppCompatActivity {
         public ApiRequestOptionsAuthorizateUser(Context context){
 
             dialog = new AlertDialog.Builder(context);
-
         }
 
         @Override

@@ -1,9 +1,7 @@
 package com.example.demoexamsmartphone.FragmentsHomePage;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -28,8 +26,8 @@ import com.example.demoexamsmartphone.Activities.InsideRoom;
 import com.example.demoexamsmartphone.Classes.MyErrorAlertDialog;
 import com.example.demoexamsmartphone.Classes.MySingleton;
 import com.example.demoexamsmartphone.Classes.Room;
-import com.example.demoexamsmartphone.R;
 import com.example.demoexamsmartphone.Classes.roomsRecyclerAdapter;
+import com.example.demoexamsmartphone.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

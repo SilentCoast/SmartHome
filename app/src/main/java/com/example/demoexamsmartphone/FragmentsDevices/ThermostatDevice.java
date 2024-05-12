@@ -2,20 +2,16 @@ package com.example.demoexamsmartphone.FragmentsDevices;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
-
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -239,51 +235,4 @@ public void SetDefaults(){
             Log.i(TAG, className+" response "+ s);
         }
     }
-
-//    private class ApiRequestGetDeviceData extends AsyncTask<String,String,String>{
-//        String TAG = "API";
-//        String className = getClass().getSimpleName();
-//        @Override
-//        protected String doInBackground(String... strings) {
-//
-//            HttpsURLConnection connection = null;
-//            try {
-//                URL url = new URL(getResources().getString(R.string.baseURL)+"/device/"+String.valueOf(device.getId()));
-//                connection = (HttpsURLConnection) url.openConnection();
-//                connection.setRequestMethod("GET");
-//                connection.setRequestProperty("id",String.valueOf(device.getId()));
-//                connection.setRequestProperty("token",token);
-//                connection.setRequestProperty("uuid",uuid);
-//
-//                Log.i(TAG, className+" "+ connection.getResponseCode()+" "+ connection.getResponseMessage());
-//
-//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//                String line;
-//                StringBuilder stringBuilder = new StringBuilder();
-//                while ((line = bufferedReader.readLine())!=null){
-//                    stringBuilder.append(line);
-//                }
-//                return stringBuilder.toString();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            finally {
-//                if (connection != null) {
-//                    connection.disconnect();
-//                }
-//
-//            }
-//
-//
-//            return null;
-//
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            super.onPostExecute(s);
-//            Log.i(TAG, className+" response "+ s);
-//        }
-//    }
 }
